@@ -1,8 +1,8 @@
 <?php
 
-namespace MVC\Framework\Router;
+namespace MVC\Framework\Dispatcher;
 
-class Router
+class Dispatcher
 {
 
     protected $defaultController = 'Home';
