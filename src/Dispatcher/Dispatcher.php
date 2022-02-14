@@ -93,7 +93,12 @@ class Dispatcher
                 die();
             }
 
+        } else {
+            echo "Controller '$controller' not found<br/>";
+            echo "It is temporary until 404 page appear.";
+            die();
         }
+
 
     }
 
