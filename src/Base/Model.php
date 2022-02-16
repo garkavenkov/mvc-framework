@@ -2,7 +2,7 @@
 
 namespace MVC\Framework\Base;
 
-class Model
+abstract class Model
 {
     
 }
