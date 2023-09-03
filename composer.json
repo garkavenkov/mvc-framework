@@ -1,0 +1,19 @@
+{
+    "name": "garkavenkov/mvc-framework",
+    "description": "MVC Framework",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "MVC\\Framework\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Maksim Garkavenkov",
+            "email": "maksim.garkavenkov@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
