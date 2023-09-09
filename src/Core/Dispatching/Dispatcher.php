@@ -62,6 +62,7 @@ class Dispatcher
      */
     protected function removeQueryString(string $url): string
     {        
+        // if url == / it's temporaty does not match url with route
         if ($url !== '') {
             $parts = explode('?', $url, 2);     
             if ($parts) {
@@ -137,20 +138,23 @@ class Dispatcher
             }            
 
             if ($matched_route) {
-                $this->controller = $route['controller'];
-                $this->action = $route['action'];       
-
-                if ($this->controller !== '' && class_exists($this->controller)) {                
-                    $obj = new $this->controller();
-                    if (is_callable(array($obj,$this->action))) {                        
-                        call_user_func_array(array($obj, $this->action), $this->params);
-                    } else {
-                        die("Action $this->action does not exist");
-                    }
+                if (isset($matched_route['callable'])) {
+                    $matched_route['callable']();
                 } else {
-                    die("Class $this->controller not found");
-                }            
-
+                    $this->controller = $route['controller'];
+                    $this->action = $route['action'];       
+    
+                    if ($this->controller !== '' && class_exists($this->controller)) {                
+                        $obj = new $this->controller();
+                        if (is_callable(array($obj,$this->action))) {                        
+                            call_user_func_array(array($obj, $this->action), $this->params);
+                        } else {
+                            die("Action $this->action does not exist");
+                        }
+                    } else {
+                        die("Class $this->controller not found");
+                    }            
+                }
             } else {
                 die('404 should be here');
             }           

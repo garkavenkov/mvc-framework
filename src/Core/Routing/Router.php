@@ -4,6 +4,11 @@ namespace MVC\Framework\Core\Routing;
 
 class Router
 {
+    /**
+     * Routing table
+     *
+     * @var array
+     */
     protected static $_routes = [];
 
     /**
@@ -64,22 +69,16 @@ class Router
     /**
      * Add route to the routes
      *
-     * @param string $url           URL
-     * @param string $controller    Controller class
-     * @param string $action        Action method
-     * @param string $request       REQUEST_METHOD (i.e. GET, POST, PATCH, DELETE)
+     * @param array $route  Array(url, [controller,action]/callable, request)
      * 
      * @return void
-     */
-    public static function addRoute(string $url, string $controller, string $action, string $request): void
+     */    
+    public static function addRoute(array $route): void
     {
-        self::$_routes[] = array(
-                'url' => self::convertUrlToPattern($url), 
-                'controller' => $controller, 
-                'action' => $action, 
-                'request' => strtoupper($request)
-            );
+        $route['url'] = self::convertUrlToPattern($route['url']);
+        self::$_routes[] = $route;
     }
+   
    
     /**
      * Remove route form the routes
@@ -100,6 +99,21 @@ class Router
                     break;
                 }
             }   
+        }
+    }
+
+    /**
+     * Load routes
+     *
+     * @return void
+     */
+    public static function loadRoutes(): void
+    {   
+        foreach (array_diff(scandir(ROUTES_DIR), array('..', '.')) as $filename) {
+            $file = ROUTES_DIR . '/' . $filename;
+            if (is_file($file)) {
+                require $file;
+            }
         }
     }
 }
