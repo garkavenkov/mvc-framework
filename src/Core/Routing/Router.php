@@ -33,13 +33,13 @@ class Router
 
         if ($controller !== '') {        
             $routes = array_filter(self::$_routes, function($route) use ($controller) {
-                return str_contains($route['controller'], $controller);
+                return isset($route['controller']) && str_contains($route['controller'], $controller);
             });
         }
 
         if ($action !== '') {            
             $routes = array_filter(self::$_routes, function($route) use ($action) {
-                return str_contains($route['action'], $action);                
+                return isset($route['action']) && str_contains($route['action'], $action);
             });
         }
 
