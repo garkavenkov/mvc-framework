@@ -60,7 +60,7 @@ class Router
         } else {
             $url = str_replace('/', '\/', $url);     
             $url = preg_replace('/\{(\w+)\}/', '(\w+)', $url);  
-            $url = '/' .$url . '$/';
+            $url = '/^' .$url . '$/';
         }
 
         return $url;
@@ -75,7 +75,7 @@ class Router
      */    
     public static function addRoute(array $route): void
     {
-        $route['url'] = self::convertUrlToPattern($route['url']);
+        $route['pattern'] = self::convertUrlToPattern($route['url']);
         self::$_routes[] = $route;
     }
    
@@ -91,10 +91,10 @@ class Router
     public static function removeRoute(string $url, string $request): void
     {
         $routes = self::list(request: strtoupper($request));
-        $url = self::convertUrlToPattern($url);        
+        $pattern = self::convertUrlToPattern($url);        
         if ($routes) {
             foreach($routes as $id => $route) {
-                if ($route['url'] == $url) {                    
+                if ($route['pattern'] == $pattern) {                    
                     unset(self::$_routes[$id]);
                     break;
                 }

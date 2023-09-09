@@ -127,7 +127,7 @@ class Dispatcher
 
             foreach($routes as $route) {
                 
-                if (preg_match($route['url'], $url, $matches)) {                
+                if (preg_match($route['pattern'], $url, $matches)) {                
                     if ($matches) {
                         unset($matches[0]);
                         $this->params = $matches;
