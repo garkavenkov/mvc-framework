@@ -61,13 +61,14 @@ class Dispatcher
      * @return string
      */
     protected function removeQueryString(string $url): string
-    {        
-        // if url == / it's temporaty does not match url with route
-        if ($url !== '') {
+    {   
+        if ($url == '/') {
+            return $url;
+        } else if ($url !== '') {
             $parts = explode('?', $url, 2);     
             if ($parts) {
                 $url = $parts[0];                
-                $url = preg_replace('/^\//', '', $url);
+                // $url = preg_replace('/^\//', '', $url);
                 $url = preg_replace('/\/$/', '', $url);
             }
             if (isset($parts[1])) {
