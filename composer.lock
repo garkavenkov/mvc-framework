@@ -4,12 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5ec35e9151f97f4616de5d0f25475752",
-    "packages": [],
+    "content-hash": "43c4784677656cf5a39ec131762db3cb",
+    "packages": [
+        {
+            "name": "garkavenkov/db-connector",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/garkavenkov/db-connector.git",
+                "reference": "afe80d80b3377ef1fbeecd370bbf46568ae699ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/garkavenkov/db-connector/zipball/afe80d80b3377ef1fbeecd370bbf46568ae699ba",
+                "reference": "afe80d80b3377ef1fbeecd370bbf46568ae699ba",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DBConnector\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maksim Garkavenkov",
+                    "email": "maksim.garkavenkov@gmail.com"
+                }
+            ],
+            "description": "Wrapper for PDO",
+            "support": {
+                "issues": "https://github.com/garkavenkov/db-connector/issues",
+                "source": "https://github.com/garkavenkov/db-connector/tree/v1.0.2"
+            },
+            "time": "2017-09-09T19:13:16+00:00"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "garkavenkov/db-connector": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
