@@ -16,6 +16,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "garkavenkov/db-connector": "dev-master"
+        "garkavenkov/db-connector": "dev-master",
+        "garkavenkov/registry": "dev-main"
     }
 }

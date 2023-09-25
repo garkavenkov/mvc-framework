@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43c4784677656cf5a39ec131762db3cb",
+    "content-hash": "8bfffe69b0a742f631fe9a0906bfd309",
     "packages": [
         {
             "name": "garkavenkov/db-connector",
@@ -43,13 +43,52 @@
                 "source": "https://github.com/garkavenkov/db-connector/tree/v1.0.2"
             },
             "time": "2017-09-09T19:13:16+00:00"
+        },
+        {
+            "name": "garkavenkov/registry",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/garkavenkov/registry.git",
+                "reference": "4f559c866dea451f5933c03005b8fd945b51d346"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/garkavenkov/registry/zipball/4f559c866dea451f5933c03005b8fd945b51d346",
+                "reference": "4f559c866dea451f5933c03005b8fd945b51d346",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Registry\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maksim Garkavenkov",
+                    "email": "maksim.garkavenkov@gmail.com"
+                }
+            ],
+            "description": "Key / instance storeroom",
+            "support": {
+                "issues": "https://github.com/garkavenkov/registry/issues",
+                "source": "https://github.com/garkavenkov/registry/tree/v1.0.0"
+            },
+            "time": "2023-09-25T17:49:01+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "garkavenkov/db-connector": 20
+        "garkavenkov/db-connector": 20,
+        "garkavenkov/registry": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

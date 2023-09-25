@@ -121,11 +121,11 @@ class Route
         // patch:   url/{id}        =>  controller@update(id)
         self::patch($url . "/{id}",  [$controller, 'update']);
 
-        // get:     url             =>  controller@create
-        self::get($url, [$controller, 'create']);
+        // get:     url/new         =>  controller@create
+        self::get($url . "/new", [$controller, 'create']);
 
         // post:    url             =>  controller@store
-        self::post($url . "/{id}",  [$controller, 'store']);
+        self::post($url,  [$controller, 'store']);
 
         // get:     url/{id}/delete =>  controller@delete(id)
         self::get($url . "/{id}/delete", [$controller, 'delete']);

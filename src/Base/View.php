@@ -7,8 +7,8 @@ class View
     public static function render(string $view, array $params = [])
     {
         
-        $file = VIEWS_DIR . $view .  (!str_ends_with($view, '.php') ? '.php' : '');
-        
+        $file = VIEWS_DIR . '/' . $view .  (!str_ends_with($view, '.php') ? '.php' : '');
+
         extract($params, EXTR_SKIP);
 
         if (is_readable($file)) {

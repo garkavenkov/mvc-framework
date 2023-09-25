@@ -2,6 +2,8 @@
 
 namespace MVC\Framework\Base;
 
+use Registry\Registry;
+
 class Model
 {
     private static  $model;
@@ -106,8 +108,9 @@ class Model
         }
         
         // Make method for quering DB... Consider creating Registry class for getting DB instance
-        global $dbh;
-        self::$result_stack[self::$model] = $dbh->query($sql)->getRows(\PDO::FETCH_OBJ);
+        // global $dbh;
+        $db = Registry::get('db');
+        self::$result_stack[self::$model] = $db->query($sql)->getRows(\PDO::FETCH_OBJ);
 
                
         if (self::$relation_stack) {
@@ -127,9 +130,9 @@ class Model
         self::resolveModelInfo();        
         
         $sql  = "SELECT * FROM `" .self::$table ."` WHERE `" . self::$table ."`.`id` = $id" ;
-        global $dbh;        
         
-        $result = $dbh->query($sql)->getRow(\PDO::FETCH_OBJ);
+        $db = Registry::get('db');
+        $result = $db->query($sql)->getRow(\PDO::FETCH_OBJ);
         self::$result_stack[self::$model] = $result;
         
         if (self::$relation_stack) {
@@ -144,7 +147,7 @@ class Model
      * For using deep relationships use ".". For using several relationships for model, separete them by ",".     
      *
      * @param mixed $relations      Model's relationships
-     * @return void
+     * @return static
      */
     public static function with(mixed $relations)
     {           
@@ -164,6 +167,24 @@ class Model
         return new static();
     }   
 
+    private static function queryCondition($model, $key): string
+    {
+        if ( is_array(self::$result_stack[$model]) && (count(self::$result_stack[$model]) > 1) ) {
+            return  "IN (" . 
+                    implode(',', 
+                        array_map(
+                            function($r) use($key) {
+                                return $r->$key; 
+                            }, 
+                            self::$result_stack[$model]
+                        )
+                    ) . 
+                    ")";
+        } else {
+            return " = " . self::$result_stack[$model]->$key;
+        }
+    }
+
     /**
      * Return records from child table (relationship type: one-to-many)
      *
@@ -182,25 +203,11 @@ class Model
         
         $table_name = static::getTableName($related_model);
             
-        $sql = "SELECT * FROM `$table_name` WHERE `$table_name`.`$foreign_key` ";
+        $sql = "SELECT * FROM `$table_name` WHERE `$table_name`.`$foreign_key` " . 
+                self::queryCondition($parent_class, $reference_key);
         
-        if ( is_array(self::$result_stack[$parent_class]) && (count(self::$result_stack[$parent_class]) > 1) ) {
-            $sql .= "IN (" . 
-                    implode(',', 
-                        array_map(
-                            function($r) use($reference_key) {
-                                return $r->$reference_key; 
-                            }, 
-                            self::$result_stack[$parent_class]
-                        )
-                    ) . 
-                    ")";
-        } else {
-            $sql .= "= " . self::$result_stack[$parent_class]->$reference_key;
-        }
-        
-        global $dbh;
-        $result = $dbh->query($sql)->getRows(\PDO::FETCH_OBJ);        
+        $db = Registry::get('db');
+        $result = $db->query($sql)->getRows(\PDO::FETCH_OBJ);        
         self::$result_stack[$related_model] = $result;        
     }
 
@@ -222,25 +229,11 @@ class Model
              
         $table_name = static::getTableName($related_model);
                 
-        $sql = "SELECT * FROM `$table_name` WHERE `$table_name`.`$reference_key` ";
-
-        if ( is_array(self::$result_stack[$parent_class]) && (count(self::$result_stack[$parent_class]) > 1) ) {
-            $sql .= "IN (" . 
-                    implode(',', 
-                        array_map(
-                            function($r) use($foreign_key) {
-                                return $r->$foreign_key; 
-                            }, 
-                            self::$result_stack[$parent_class]
-                        )
-                    ) . 
-                    ")";
-        } else {
-            $sql .= "= " . self::$result_stack[$parent_class]->$foreign_key;
-        }
+        $sql = "SELECT * FROM `$table_name` WHERE `$table_name`.`$reference_key` " .
+                self::queryCondition($parent_class, $foreign_key);;       
         
-        global $dbh;
-        $result = $dbh->query($sql)->getRows(\PDO::FETCH_OBJ);
+        $db = Registry::get('db');
+        $result = $db->query($sql)->getRows(\PDO::FETCH_OBJ);
         self::$result_stack[$related_model] = $result;        
     }  
 
