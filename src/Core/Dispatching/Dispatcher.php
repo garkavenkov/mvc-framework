@@ -120,7 +120,9 @@ class Dispatcher
      */
     protected function match(string $url)
     {  
-        $routes = Router::list(request: $_SERVER['REQUEST_METHOD']);
+        // Spoof POST request for  _method variable (for PUT, PATCH and DELETE methods)
+        $method = isset($_POST['_method']) ?  $_POST['_method'] : $_SERVER['REQUEST_METHOD'];
+        $routes = Router::list(request: $method);       
      
         if ($routes) {     
             
