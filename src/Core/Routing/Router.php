@@ -59,7 +59,7 @@ class Router
             $url = '/^$/';
         } else {
             $url = str_replace('/', '\/', $url);     
-            $url = preg_replace('/\{(\w+)\}/', '(\w+)', $url);  
+            $url = preg_replace('/\{(\w+)\}/', '(\d+)', $url);  
             $url = '/^' .$url . '$/';
         }
 

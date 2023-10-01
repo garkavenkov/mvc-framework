@@ -129,7 +129,10 @@ class Dispatcher
             $matched_route = [];    
 
             foreach($routes as $route) {
-                
+                if ($route['url'] == $url) {
+                    $matched_route = $route;
+                    break;
+                } 
                 if (preg_match($route['pattern'], $url, $matches)) {                
                     if ($matches) {
                         unset($matches[0]);
