@@ -289,4 +289,53 @@ class Model
             }
         }        
     }
+
+    /**
+     * Insert data into table and return inserted record
+     *
+     * @param array $data   Associative array 'field_name' => 'field_value'
+     * @return stdClass     Inserted record as an object
+     */
+    public static function create(array $data): \stdClass
+    {
+        self::resolveModelInfo();
+                
+        $fields = array_keys($data);        
+        
+        $sql  = "INSERT INTO `". self::$table ."`(`" . implode('`,`', $fields) .  "`)";
+        $sql .= "VALUES (" . implode(',', array_fill(0, count($fields), '?')) . ")";        
+        
+        $db = Registry::get('db');
+        try {            
+            $id = $db->prepare($sql)->execute(array_values($data))->getLastInsertedId();            
+            $sql  = "SELECT * FROM `" .self::$table ."` WHERE `" . self::$table ."`.`id` = $id" ;
+            $result = $db->query($sql)->getRow(\PDO::FETCH_OBJ);
+            return $result;
+            
+        } catch(\PDOException $e) {
+            throw new \Exception($e->getMessage(), 500);
+        }
+    }
+
+    /**
+     * Delete record 
+     *
+     * @param int $id   Record ID
+     * @return 
+     */
+    public static function delete(int $id)
+    {
+        self::resolveModelInfo();       
+        
+        $sql  = "DELETE FROM `" .self::$table ."` WHERE `" . self::$table ."`.`id` = $id" ;
+
+        $db = Registry::get('db');
+
+        try {
+            $res = $db->exec($sql);            
+            return $res;
+        } catch(\PDOException $e) {
+            throw new \Exception($e->getMessage(), 500);            
+        }
+    }
 }
