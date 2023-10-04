@@ -4,8 +4,46 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8bfffe69b0a742f631fe9a0906bfd309",
+    "content-hash": "830b3b0249456c60462626c45560579d",
     "packages": [
+        {
+            "name": "garkavenkov/advanced-print",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/garkavenkov/advanced-print.git",
+                "reference": "2c6473ebdad734c9424c05d60371eb421a851e43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/garkavenkov/advanced-print/zipball/2c6473ebdad734c9424c05d60371eb421a851e43",
+                "reference": "2c6473ebdad734c9424c05d60371eb421a851e43",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AdvancedPrint\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maksim Garkavenkov",
+                    "email": "maksim.garkavenkov@gmail.com"
+                }
+            ],
+            "description": "Colorizes output text in terminal.",
+            "support": {
+                "issues": "https://github.com/garkavenkov/advanced-print/issues",
+                "source": "https://github.com/garkavenkov/advanced-print/tree/v0.3.0"
+            },
+            "time": "2023-10-04T19:39:25+00:00"
+        },
         {
             "name": "garkavenkov/db-connector",
             "version": "dev-master",
@@ -88,7 +126,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "garkavenkov/db-connector": 20,
-        "garkavenkov/registry": 20
+        "garkavenkov/registry": 20,
+        "garkavenkov/advanced-print": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
