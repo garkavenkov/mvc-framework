@@ -12,7 +12,7 @@ class MakeController extends ConsoleCommand
      *
      * @var string
      */
-    protected $command = "mvc make:controller <ControllerName> [arguments]";
+    protected $command = "mvc make:controller <name> [arguments]";
 
     /**
      * Command description
@@ -27,9 +27,9 @@ class MakeController extends ConsoleCommand
      * @var array
      */
     protected $arguments = array(
-        '--resource'        =>  'Створити контролер <ControllerName> з методами [U_Yellow]resource*', 
-        '--api'             =>  'Створити контролер <ControllerName> з методами [U_Yellow]api*',
-        '--model=<Model>'   =>  'Створить контролер <ControllerName> разом з класом моделі [Yellow]<Model>'
+        '--resource'        =>  'Створити контролер <name> з методами [U_Yellow]resource*', 
+        '--api'             =>  'Створити контролер <name> з методами [U_Yellow]api*',
+        '--model=<Model>'   =>  'Створить контролер <name> разом з класом моделі [Yellow]<Model>'
     );
 
     /**

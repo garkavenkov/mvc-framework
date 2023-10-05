@@ -48,7 +48,8 @@ class MakeCommand extends ConsoleCommand
     protected $footnotes = array(
         'зареєструвати у файлі*'  =>  array (            
             'Додати запис у файл app/config/commands.php у вигляді',
-            "'test'  =>  TestCommand::class"
+            "[D_White]//command => class",
+            "'test'    => TestCommand::class"
         )            
     );
 

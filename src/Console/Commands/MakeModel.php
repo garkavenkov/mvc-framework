@@ -12,7 +12,7 @@ class MakeModel extends ConsoleCommand
      *
      * @var string
      */
-    protected $command = 'make:model <ModelName> [arguments]';
+    protected $command = 'make:model <name> [arguments]';
 
     /**
      * Command description
@@ -27,7 +27,7 @@ class MakeModel extends ConsoleCommand
      * @var array
      */
     protected $arguments = array(        
-        '--controller=[resource|api]' =>  'Створити контролер <ModelName>Controller з методами [U_Yellow]resource*[Reset] або [U_Yellow]api*[Reset]',
+        '--controller=[resource|api]' =>  'Створити контролер <name>Controller з методами [U_Yellow]resource*[Reset] або [U_Yellow]api*[Reset]',
     );
 
     /**
